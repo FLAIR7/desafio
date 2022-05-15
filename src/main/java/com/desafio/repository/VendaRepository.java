@@ -11,9 +11,13 @@ import java.util.List;
 @Repository
 public interface VendaRepository extends JpaRepository<Venda, Long> {
 
-    //List<Venda> findByDataVenda(LocalDate dataVenda);
-
-    @Query("select vd from Venda vd join vd.vendedores v where v.id = ?1 and vd.dataVenda between ?2 and ?2")
+    @Query("SELECT vd FROM Venda vd " +
+            "JOIN vd.vendedores v " +
+            "WHERE v.id = ?1 " +
+            "AND vd.dataVenda " +
+            "BETWEEN ?2 AND ?2")
     List<Venda> findByDataVenda(Long vendedorId, LocalDate dataVenda);
+
+
 
 }

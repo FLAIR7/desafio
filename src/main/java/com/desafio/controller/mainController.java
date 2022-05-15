@@ -32,8 +32,8 @@ public class mainController {
         return mainService.getVendedorById(vendedorId);
     }
 
-    // url para achar a data das vendas http://localhost:8080/api/v2?dataVenda=2020-03-29
-    @GetMapping(path = "{vendedorId}/vendas")
+    // url para achar a data das vendas http://localhost:8080/?dataVenda=2020-03-29
+    @GetMapping(path = "{vendedorId}/")
     public Vendedor vendedorVendasDiarias(@PathVariable("vendedorId") Long vendedorId,
                                           @RequestParam("dataVenda") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataVenda){
         return mainService.getVendedorByVendasDiarias(vendedorId, dataVenda);
@@ -52,7 +52,12 @@ public class mainController {
 
     @PutMapping(path = "{vendedorId}")
     public void atualizarVendedor(@PathVariable("vendedorId") Long vendedorId,
-                                  @RequestParam(required = false) String nome) {
-        mainService.atualizarVendedor(vendedorId, nome);
+                                  @RequestBody Vendedor vendedor) {
+        mainService.atualizarVendedor(vendedorId, vendedor.getNome());
+    }
+
+    @DeleteMapping(path = "{vendedorId}")
+    public void deleteVendedor(@PathVariable("vendedorId") Long vendedorId){
+        mainService.deletarVendedor(vendedorId);
     }
 }

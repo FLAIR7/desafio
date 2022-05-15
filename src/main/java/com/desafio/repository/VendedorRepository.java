@@ -5,16 +5,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
 
-    Vendedor findByVendedorId(Long vendedorId);
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE Vendedor v " +
+            "SET v.nome=:nome " +
+            "WHERE v.id=:vendedorId")
+    void atualizaVendedor(@Param("vendedorId") Long vendedorId, @Param("nome") String nome);
 
-    @Modifying
-    @Query("update Vendedor v set v.nome = ?2 where v.id = ?1")
-    void atualizaVendedor(Long vendedorId, String nome);
 
 }

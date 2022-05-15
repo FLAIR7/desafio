@@ -18,7 +18,7 @@ public class Vendedor {
 
     private double totalVendas;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "vendedores")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "vendedores")
     private List<Venda> vendas;
 
     public Vendedor(){
