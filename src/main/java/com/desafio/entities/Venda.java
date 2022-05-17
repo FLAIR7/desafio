@@ -18,8 +18,9 @@ public class Venda {
 
     private Double valor;
 
+    //Cascade.Type.ALL
     @ManyToOne(
-            cascade = CascadeType.ALL
+        cascade = {CascadeType.PERSIST, CascadeType.DETACH}
     )
     @JoinTable(
             name = "venda_vendedor",

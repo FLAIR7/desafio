@@ -1,6 +1,5 @@
 package com.desafio.controller;
 
-import com.desafio.entities.Venda;
 import com.desafio.entities.Vendedor;
 import com.desafio.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
-public class mainController {
+public class VendedorController {
 
     private final MainService mainService;
 
     @Autowired
-    public mainController(MainService mainService) {
+    public VendedorController(MainService mainService) {
         this.mainService = mainService;
     }
 
@@ -32,7 +31,6 @@ public class mainController {
         return mainService.getVendedorById(vendedorId);
     }
 
-    // url para achar a data das vendas http://localhost:8080/?dataVenda=2020-03-29
     @GetMapping(path = "{vendedorId}/")
     public Vendedor vendedorVendasDiarias(@PathVariable("vendedorId") Long vendedorId,
                                           @RequestParam("dataVenda") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataVenda){
@@ -44,11 +42,6 @@ public class mainController {
         mainService.salvarVendedor(vendedor);
     }
 
-    @PostMapping(path = "{vendedorId}")
-    public void salvarVenda(@PathVariable("vendedorId") Long vendedorId,
-                            @RequestBody Venda venda) {
-        mainService.salvarVenda(vendedorId, venda);
-    }
 
     @PutMapping(path = "{vendedorId}")
     public void atualizarVendedor(@PathVariable("vendedorId") Long vendedorId,

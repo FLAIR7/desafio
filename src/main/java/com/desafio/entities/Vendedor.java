@@ -44,8 +44,12 @@ public class Vendedor {
         return totalVendas;
     }
 
-    public void setTotalVendas(double totalVendas) {
+    public void addTotalVendas(double totalVendas) {
         this.totalVendas += totalVendas;
+    }
+
+    public void subtractTotalVendas(double totalVendas) {
+        this.totalVendas -= totalVendas;
     }
 
     public List<Venda> getVendas() {

@@ -60,7 +60,7 @@ public class MainService {
         Vendedor vendedor = vendedorRepository
                 .findById(vendedorId)
                 .orElseThrow(() -> new NoSuchElementException("Vendedor id: " + vendedorId + " não existe"));
-        vendedor.setTotalVendas(venda.getValor());
+        vendedor.addTotalVendas(venda.getValor());
         venda.setVendedores(vendedor);
         vendaRepository.save(venda);
     }
@@ -80,8 +80,29 @@ public class MainService {
     public void deletarVendedor(Long vendedorId){
         Vendedor vendedor = vendedorRepository
                 .findById(vendedorId)
-                .orElseThrow(() -> new NoSuchElementException("Não existe o vendedor com id: " + vendedorId + " para ser excluido"));
+                .orElseThrow(() -> new NoSuchElementException(
+                        "Não existe o vendedor com id: " + vendedorId + " para ser excluido"
+                ));
         vendedorRepository.deleteById(vendedorId);
+    }
+
+
+    public void deletarVenda(Long vendedorId, Long vendaId) {
+        Vendedor vendedor = vendedorRepository
+                .findById(vendedorId)
+                .orElseThrow(() -> new NoSuchElementException(
+                        "Não existe o vendedor com id: " + vendedorId + " para ser excluido"
+                ));
+        Venda venda = vendaRepository
+                .findById(vendaId)
+                .orElseThrow(() -> new NoSuchElementException(
+                        "Não existe a venda com id: " + vendaId + " para ser excluida"
+                ));
+        vendedor.subtractTotalVendas(venda.getValor());
+        List<Venda> vendas = vendedor.getVendas();
+        vendas.removeIf(x -> x.getVendaId() == vendaId);
+        vendedor.setVendas(vendas);
+        vendaRepository.deleteById(vendaId);
     }
 
 }
