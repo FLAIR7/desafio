@@ -8,9 +8,9 @@ Desafio backend em java
 
 
 # Premissas:
-Criar uma API usando Spring Boot
-Utilizar um banco de dados em memória (HSQLDB ou H2)
-Não é necessário desenvolver front-end, apenas o back-end
+Criar uma API usando Spring Boot.
+Utilizar um banco de dados em memória (HSQLDB ou H2).
+Não é necessário desenvolver front-end, apenas o back-end.
 
 # Teste: 
 
@@ -31,25 +31,18 @@ curl -X POST -H "Content-Type: application/json" -d '{"nome: "Diego"}' http://lo
 ```
 2. <b>Faça uma venda e associe com o vendedor</b>
 ```
-curl -X post -H "Content-Type: application/json" -d '{"dataVenda": "2021-05-19", "valor": 500}' http://localhost:8080/1
+curl -X post -H "Content-Type: application/json" -d '{"dataVenda": "2021-05-19", "valor": 500}' http://localhost:8080/29b11df1-f5c2-4437-beba-cbc33e0ee1c0 
 ```
 
 # Outros verbos http:
 
-<b>Filtra as vendas do vendedor com id 1 e na data de 2022/03/19:</b>
-```http://localhost:8080/1/dataVenda?=2022-03-19```
+<b>Filtra as vendas do vendedor '29b11df1-f5c2-4437-beba-cbc33e0ee1c0' na data de 2022/03/19:</b>
+```http://localhost:8080/29b11df1-f5c2-4437-beba-cbc33e0ee1c0/dataVenda?=2022-03-19```
 
-<b>Deleta o vendedor com id 1:</b> 
-```curl -X DELETE http://localhost/1```
+<b>Deleta o vendedor com id '29b11df1-f5c2-4437-beba-cbc33e0ee1c0':</b> 
+```curl -X DELETE http://localhost/29b11df1-f5c2-4437-beba-cbc33e0ee1c0 ```
 
-<b>Atualiza o vendedor com id 1:</b>  
-```curl -X PUT -H "Content-Type: application/json" -d '{"nome": "Carlos"}' http://localhost/1```
-
-
-
-
-
-
-
+<b>Atualiza o vendedor com id '29b11df1-f5c2-4437-beba-cbc33e0ee1c0':</b>  
+```curl -X PUT -H "Content-Type: application/json" -d '{"nome": "Carlos"}' http://localhost/29b11df1-f5c2-4437-beba-cbc33e0ee1c0```
 
 
